@@ -1,13 +1,15 @@
-import { SET_ERRORS } from './types'
+import { SET_ERRORS } from 'types/actions/error'
+import { IErrors } from '../../types/state/error'
+import { AppActions } from 'types/actions'
 
-export const setErrors = (error: any) => {
+export const setErrors = (errors: IErrors): AppActions => {
   return {
     type: SET_ERRORS,
-    payload: error,
+    payload: errors,
   }
 }
 
-export const clearErrors = () => {
+export const clearErrors = (): AppActions => {
   return {
     type: SET_ERRORS,
     payload: {},

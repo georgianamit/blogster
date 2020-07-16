@@ -7,16 +7,23 @@ import {
   DELETE_POST,
   TOGGLE_POSTS_LOADING,
   TOGGLE_POST_LOADING,
-} from '../actions/types'
-
-const initialState = {
+} from 'types/actions/post'
+import { AppActions } from 'types/actions'
+import { IPost } from 'types/state'
+interface IState {
+  post: IPost | {}
+  posts: IPost[]
+  postLoading: boolean
+  postsLoading: boolean
+}
+const initialState: IState = {
   post: {},
   posts: [],
   postLoading: false,
   postsLoading: false,
 }
 
-export default function (state = initialState, action: any) {
+const postReducers = (state: IState = initialState, action: AppActions) => {
   switch (action.type) {
     case CREATE_POST:
       return {
@@ -32,10 +39,10 @@ export default function (state = initialState, action: any) {
     case GET_POST:
       return {
         ...state,
-        post: { ...action.payload[0] },
+        post: { ...action.payload },
       }
     case UPDATE_POST:
-      const posts = state.posts.filter((post: any) => post._id !== action.payload._id)
+      const posts = state.posts.filter((post: IPost) => post._id !== action.payload._id)
       return {
         ...state,
         post: {},
@@ -44,7 +51,7 @@ export default function (state = initialState, action: any) {
     case DELETE_POST:
       return {
         ...state,
-        posts: state.posts.filter((post: any) => post._id !== action.payload),
+        posts: state.posts.filter((post: IPost) => post._id !== action.payload),
       }
     case TOGGLE_POST_LOADING:
       return {
@@ -62,3 +69,5 @@ export default function (state = initialState, action: any) {
       return state
   }
 }
+
+export default postReducers

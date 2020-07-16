@@ -1,13 +1,21 @@
-import { SET_CURRENT_USER, TOGGLE_USER_LOADING } from '../actions/types'
+import { SET_CURRENT_USER, TOGGLE_USER_LOADING } from 'types/actions/user'
 import isEmpty from 'is-empty'
+import { AppActions } from 'types/actions'
+import { IUser } from 'types/state/user'
 
-const initialState = {
+interface IState {
+  isAuthenticated: boolean
+  user: IUser | {}
+  userLoading: boolean
+}
+
+const initialState: IState = {
   isAuthenticated: false,
   user: {},
   userLoading: false,
 }
 
-export default function (state = initialState, action: any) {
+const authReducers = (state: IState = initialState, action: AppActions) => {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
@@ -24,3 +32,5 @@ export default function (state = initialState, action: any) {
       return state
   }
 }
+
+export default authReducers

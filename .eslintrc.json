@@ -16,6 +16,11 @@
     "prettier/prettier": ["error", { "singleQuote": true }]
   },
   "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    },
     "react": {
       "pragma": "React",
       "version": "detect"

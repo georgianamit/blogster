@@ -2,13 +2,14 @@ import axios from 'axios'
 import setAuthToken from '../../utils/setAuthToken'
 import jwt_decode from 'jwt-decode'
 
-import { SET_CURRENT_USER, TOGGLE_USER_LOADING } from './types'
+import { SET_CURRENT_USER, TOGGLE_USER_LOADING } from '../../types/actions/user'
 import { resetPost } from './postActions'
 import { setErrors } from './errorActions'
+import { IUser, ITokenDecoded } from '../../types/state/user'
+import { Dispatch } from 'react'
+import { AppActions } from 'types/actions'
 
-// export interface IUserData {}
-
-export const registerUser = (userData: any, history: any) => (dispatch: any) => {
+export const registerUser = (userData: IUser, history: any) => (dispatch: Dispatch<AppActions>) => {
   dispatch(toggleUserLoading())
   axios
     .post('/api/users/signup', userData)
@@ -23,7 +24,7 @@ export const registerUser = (userData: any, history: any) => (dispatch: any) => 
     })
 }
 
-export const loginUser = (userData: any) => (dispatch: any) => {
+export const loginUser = (userData: { email: string; password: string }) => (dispatch: Dispatch<AppActions>) => {
   dispatch(toggleUserLoading())
   axios
     .post('/api/users/login', userData)
@@ -32,7 +33,7 @@ export const loginUser = (userData: any) => (dispatch: any) => {
       const { token } = res.data
       localStorage.setItem('jwtToken', token)
       setAuthToken(token)
-      const decoded = jwt_decode(token)
+      const decoded: ITokenDecoded = jwt_decode(token)
       dispatch(setCurrentUser(decoded))
       dispatch(toggleUserLoading())
     })
@@ -42,20 +43,20 @@ export const loginUser = (userData: any) => (dispatch: any) => {
     })
 }
 
-export const setCurrentUser = (userData: any) => {
+export const setCurrentUser = (userData: ITokenDecoded): AppActions => {
   return {
     type: SET_CURRENT_USER,
     payload: userData,
   }
 }
 
-export const toggleUserLoading = () => {
+export const toggleUserLoading = (): AppActions => {
   return {
     type: TOGGLE_USER_LOADING,
   }
 }
 
-export const logoutUser = () => (dispatch: any) => {
+export const logoutUser = () => (dispatch: Dispatch<AppActions>) => {
   localStorage.removeItem('jwtToken')
   setAuthToken(false)
   dispatch(setCurrentUser({}))

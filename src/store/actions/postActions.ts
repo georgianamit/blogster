@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Dispatch } from 'redux'
 import {
   CREATE_POST,
   GET_POST,
@@ -8,11 +9,13 @@ import {
   TOGGLE_POSTS_LOADING,
   TOGGLE_POST_LOADING,
   RESET_POST,
-} from './types'
-
+} from 'types/actions/post'
+import { IPost } from 'types/state'
 import { setErrors, clearErrors } from './errorActions'
+import { AppActions } from 'types/actions'
+import { IUser } from 'types/state/user'
 
-export const createPost = (postData: any, history: any) => (dispatch: any) => {
+export const createPost = (postData: IPost, history: any) => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostLoading())
   axios
     .post('/api/posts/create', postData)
@@ -30,7 +33,7 @@ export const createPost = (postData: any, history: any) => (dispatch: any) => {
     })
 }
 
-export const getPostByID = (id: any) => (dispatch: any) => {
+export const getPostByID = (id: string) => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostLoading())
   axios
     .get(`/api/posts/post/${id}`)
@@ -49,7 +52,7 @@ export const getPostByID = (id: any) => (dispatch: any) => {
     })
 }
 
-export const getPostsByAuthor = (author: any) => (dispatch: any) => {
+export const getPostsByAuthor = (author: IUser) => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostsLoading())
   axios
     .get(`/api/posts/author/${author}`)
@@ -66,7 +69,7 @@ export const getPostsByAuthor = (author: any) => (dispatch: any) => {
     })
 }
 
-export const getPosts = () => (dispatch: any) => {
+export const getPosts = () => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostsLoading())
   axios
     .get(`/api/posts/`)
@@ -84,7 +87,7 @@ export const getPosts = () => (dispatch: any) => {
     })
 }
 
-export const updatePost = (id: any, postData: any, history: any) => (dispatch: any) => {
+export const updatePost = (id: string, postData: any, history: any) => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostLoading())
   axios
     .patch(`/api/posts/update/${id}`, postData)
@@ -102,7 +105,7 @@ export const updatePost = (id: any, postData: any, history: any) => (dispatch: a
     })
 }
 
-export const deletePost = (id: any, history: any) => (dispatch: any) => {
+export const deletePost = (id: string, history: any) => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostLoading())
   axios
     .delete(`/api/posts/delete/${id}`)
@@ -120,19 +123,19 @@ export const deletePost = (id: any, history: any) => (dispatch: any) => {
     })
 }
 
-export const resetPost = () => {
+export const resetPost = (): AppActions => {
   return {
     type: RESET_POST,
   }
 }
 
-export const togglePostLoading = () => {
+export const togglePostLoading = (): AppActions => {
   return {
     type: TOGGLE_POST_LOADING,
   }
 }
 
-export const togglePostsLoading = () => {
+export const togglePostsLoading = (): AppActions => {
   return {
     type: TOGGLE_POSTS_LOADING,
   }
