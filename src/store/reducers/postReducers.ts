@@ -11,7 +11,7 @@ import {
 import { AppActions } from 'types/actions'
 import { IPost } from 'types/state'
 interface IState {
-  post: IPost | {}
+  post: IPost
   posts: IPost[]
   postLoading: boolean
   postsLoading: boolean

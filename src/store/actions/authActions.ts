@@ -12,7 +12,7 @@ import { AppActions } from 'types/actions'
 export const registerUser = (userData: IUser, history: any) => (dispatch: Dispatch<AppActions>) => {
   dispatch(toggleUserLoading())
   axios
-    .post('/api/users/signup', userData)
+    .post('user/signup', userData)
     .then((res) => {
       dispatch(toggleUserLoading())
       localStorage.setItem('loginMessage', 'Successfully registered. Login to continue')
@@ -27,7 +27,7 @@ export const registerUser = (userData: IUser, history: any) => (dispatch: Dispat
 export const loginUser = (userData: { email: string; password: string }) => (dispatch: Dispatch<AppActions>) => {
   dispatch(toggleUserLoading())
   axios
-    .post('/api/users/login', userData)
+    .post('user/login', userData)
     .then((res) => {
       dispatch(resetPost())
       const { token } = res.data

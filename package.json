@@ -39,7 +39,10 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000/",
+  "proxy": "https://blogster-api.herokuapp.com/api",
+  "engines": {
+    "node": "12.16.3"
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -48,7 +51,7 @@
     "@types/jest": "^24.9.1",
     "@types/jwt-decode": "^2.2.1",
     "@types/node": "^12.12.47",
-    "@types/react": "^16.9.41",
+    "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
