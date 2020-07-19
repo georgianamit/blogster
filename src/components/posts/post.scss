@@ -1,0 +1,46 @@
+@import 'style/custom';
+
+// ############ List Post #####################
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 400px));
+  grid-gap: 1em;
+}
+
+a:link {
+  text-decoration: none !important;
+}
+
+.deckStyle {
+  @include box-shadow($cardShadowInitial);
+}
+
+.deckStyle:hover {
+  @include transition(0.4s);
+  @include box-shadow($cardShadowHover);
+}
+
+// ######### Post ############
+
+.postCover {
+  background: $themeColor;
+  color: $light;
+}
+
+// ############# ViewPost ##############
+
+.view-post {
+  overflow-wrap: break-word;
+}
+
+.post-title {
+  color: $primaryColor;
+}
+
+.post-details {
+  color: $subtitleColor;
+}
+
+.post-body {
+}
