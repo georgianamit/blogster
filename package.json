@@ -39,7 +39,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://blogster-api.herokuapp.com/api",
+  "proxy": "https://blogster-api.herokuapp.com",
   "engines": {
     "node": "12.16.3"
   },

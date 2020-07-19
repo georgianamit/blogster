@@ -18,7 +18,7 @@ import { IUser } from 'types/state/user'
 export const createPost = (postData: IPost, history: any) => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostLoading())
   axios
-    .post('/post/create', postData)
+    .post('/api/post/create', postData)
     .then((res) => {
       dispatch({
         type: CREATE_POST,
@@ -36,7 +36,7 @@ export const createPost = (postData: IPost, history: any) => (dispatch: Dispatch
 export const getPostByID = (id: string) => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostLoading())
   axios
-    .get(`/post/${id}`)
+    .get(`/api/post/${id}`)
     .then((res) => {
       dispatch({
         type: GET_POST,
@@ -55,7 +55,7 @@ export const getPostByID = (id: string) => (dispatch: Dispatch<AppActions>) => {
 export const getPostsByAuthor = (author: IUser) => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostsLoading())
   axios
-    .get(`/post/author/${author}`)
+    .get(`/api/post/author/${author}`)
     .then((res) => {
       dispatch({
         type: GET_POSTS,
@@ -72,7 +72,7 @@ export const getPostsByAuthor = (author: IUser) => (dispatch: Dispatch<AppAction
 export const getPosts = () => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostsLoading())
   axios
-    .get(`/post`)
+    .get(`/api/post`)
     .then((res) => {
       dispatch({
         type: GET_POSTS,
@@ -90,7 +90,7 @@ export const getPosts = () => (dispatch: Dispatch<AppActions>) => {
 export const updatePost = (id: string, postData: any, history: any) => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostLoading())
   axios
-    .patch(`/post/update/${id}`, postData)
+    .patch(`/api/post/update/${id}`, postData)
     .then((res) => {
       dispatch({
         type: UPDATE_POST,
@@ -108,7 +108,7 @@ export const updatePost = (id: string, postData: any, history: any) => (dispatch
 export const deletePost = (id: string, history: any) => (dispatch: Dispatch<AppActions>) => {
   dispatch(togglePostLoading())
   axios
-    .delete(`/post/delete/${id}`)
+    .delete(`/api/post/delete/${id}`)
     .then((res) => {
       dispatch({
         type: DELETE_POST,
